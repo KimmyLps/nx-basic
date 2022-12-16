@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  nx-monorepo-ms-k8s-devcon:
+    image: mcr.microsoft.com/devcontainers/javascript-node:0-18-bullseye
+    # build: 
+    #   context: ..
+    #   dockerfile: .devcontainer/Dockerfile
+
+    #   # Update 'VARIANT' to pick a .NET Core version: 3.1, 6.0
+    #   # Append -bullseye or -focal to pin to an OS version
+    #   args:
+    #     - "VARIANT=6.0-bullseye"
+    #     - "NODE_VERSION=lts/*"
+    container_name: nx-monorepo-ms-k8s-devcon
+
+    volumes:
+      - ../..:/workspaces/nx-basic:cached
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    command: sleep infinity
+
+    networks:
+      - nx-monorepo-ms-k8s-ssl-network
+
+networks:
+  nx-monorepo-ms-k8s-ssl-network:
+    external: true
+    name: nx-monorepo-ms-k8s-ssl-network
